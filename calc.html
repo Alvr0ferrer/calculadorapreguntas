@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Preguntas Falladas</title>
+    <script>
+        function calcularPreguntasFalladas() {
+            // Obtener los valores de los inputs
+            const notaAprobar = parseFloat(document.getElementById('notaAprobar').value);
+            const numPreguntas = parseFloat(document.getElementById('numPreguntas').value);
+            const preguntasRespondidas = parseFloat(document.getElementById('preguntasRespondidas').value);
+            const numQuita = parseFloat(document.getElementById('numQuita').value);
+
+            // Realizar el cálculo
+            const numerador = (notaAprobar * numPreguntas) / 10 - preguntasRespondidas;
+            const denominador = -1 - (1 / numQuita);
+            const preguntasFalladas = numerador / denominador;
+
+            // Mostrar el resultado
+            document.getElementById('resultado').innerText = `Preguntas que puedes fallar: ${preguntasFalladas.toFixed(2)}`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculadora de Preguntas Falladas</h1>
+    <form onsubmit="event.preventDefault(); calcularPreguntasFalladas();">
+        <label for="notaAprobar">Nota para aprobar (NA):</label>
+        <input type="number" id="notaAprobar" step="0.1" required><br><br>
+
+        <label for="numPreguntas">Número de preguntas del examen (N°P):</label>
+        <input type="number" id="numPreguntas" required><br><br>
+
+        <label for="preguntasRespondidas">Preguntas respondidas correctamente (PR):</label>
+        <input type="number" id="preguntasRespondidas" required><br><br>
+
+        <label for="numQuita">Número de preguntas que cada pregunta mal quita (NQ):</label>
+        <input type="number" id="numQuita" step="0.1" required><br><br>
+
+        <button type="submit">Calcular</button>
+    </form>
+
+    <h2 id="resultado"></h2>
+</body>
+</html>
